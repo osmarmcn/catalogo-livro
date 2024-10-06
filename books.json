@@ -1,0 +1,26 @@
+[
+    {
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "year": 1960,
+      "rating": 4.5,
+      "ratingCount": 10
+    },
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Science Fiction",
+      "year": 1949,
+      "rating": 4.3,
+      "ratingCount": 8
+    },
+    {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "year": 1813,
+      "rating": 4.2,
+      "ratingCount": 6
+    }
+  ]
