@@ -1,13 +1,13 @@
 let books = [];
 
-// Função para exibir livros
+
 function displayBooks(booksToDisplay = books) {
-    const booksContainer = document.getElementById('books-container');
-    booksContainer.innerHTML = '';
+    const booksContainer = document.getElementById('books-container')
+    booksContainer.innerHTML = ''
 
     booksToDisplay.forEach(book => {
-        const bookCard = document.createElement('div');
-        bookCard.classList.add('book-card');
+        const bookCard = document.createElement('div')
+        bookCard.classList.add('book-card')
         bookCard.innerHTML = `
             <h3>${book.title}</h3>
             <p><strong>Autor:</strong> ${book.author}</p>
@@ -15,18 +15,18 @@ function displayBooks(booksToDisplay = books) {
             <p><strong>Ano:</strong> ${book.year}</p>
             <p><strong>Avaliação:</strong> <span class="rating">${book.rating.toFixed(1)}</span></p>
             <button onclick="rateBook('${book.title}')">Avaliar</button>
-        `;
-        booksContainer.appendChild(bookCard);
-    });
+        `
+        booksContainer.appendChild(bookCard)
+    })
 }
 
-// Função para adicionar um novo livro
+
 function addBook(event) {
-    event.preventDefault();
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
-    const genre = document.getElementById('genre').value;
-    const year = parseInt(document.getElementById('year').value);
+    event.preventDefault()
+    const title = document.getElementById('title').value
+    const author = document.getElementById('author').value
+    const genre = document.getElementById('genre').value
+    const year = parseInt(document.getElementById('year').value)
 
     const newBook = {
         title,
@@ -35,15 +35,15 @@ function addBook(event) {
         year,
         rating: 0,
         ratingCount: 0
-    };
+    }
 
-    books.push(newBook);
-    saveToJSON();
-    displayBooks();
-    event.target.reset();
+    books.push(newBook)
+    saveToJSON()
+    displayBooks()
+    event.target.reset()
 }
 
-// Função para buscar livros
+
 function searchBooks() {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const filteredBooks = books.filter(book => 
@@ -54,46 +54,46 @@ function searchBooks() {
     displayBooks(filteredBooks);
 }
 
-// Função para ordenar livros
+
 function sortBooks() {
-    const sortBy = document.getElementById('sort-select').value;
+    const sortBy = document.getElementById('sort-select').value
     const sortedBooks = [...books].sort((a, b) => {
         if (sortBy === 'rating') {
             return b.rating - a.rating;
         }
-        return a[sortBy].localeCompare(b[sortBy]);
+        return a[sortBy].localeCompare(b[sortBy])
     });
-    displayBooks(sortedBooks);
+    displayBooks(sortedBooks)
 }
 
-// Função para avaliar um livro
+
 function rateBook(title) {
-    const rating = parseFloat(prompt(`Avalie ${title} (0-5):`, '0'));
+    const rating = parseFloat(prompt(`Avalie ${title} (0-5):`, '0'))
     if (isNaN(rating) || rating < 0 || rating > 5) {
-        alert('Por favor, insira uma avaliação válida entre 0 e 5.');
-        return;
+        alert('Por favor, insira uma avaliação válida entre 0 e 5.')
+        return
     }
 
-    const book = books.find(b => b.title === title);
-    book.rating = ((book.rating * book.ratingCount) + rating) / (book.ratingCount + 1);
-    book.ratingCount++;
+    const book = books.find(b => b.title === title)
+    book.rating = ((book.rating * book.ratingCount) + rating) / (book.ratingCount + 1)
+    book.ratingCount++
 
-    saveToJSON();
-    displayBooks();
+    saveToJSON()
+    displayBooks()
 }
 
-// Função para salvar livros no JSON
+
 function saveToJSON() {
-    localStorage.setItem('books', JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books))
 }
 
-// Função para carregar livros do JSON
+
 function loadFromJSON() {
-    const storedBooks = localStorage.getItem('books');
+    const storedBooks = localStorage.getItem('books')
     if (storedBooks) {
-        books = JSON.parse(storedBooks);
+        books = JSON.parse(storedBooks)
     } else {
-        // Se não houver livros no localStorage, carregue os livros iniciais
+       
         books = [
             {
                 "title": "O Senhor dos Anéis",
@@ -120,15 +120,15 @@ function loadFromJSON() {
                 "ratingCount": 6
             }
         ];
-        saveToJSON(); // Salva os livros iniciais no localStorage
+        saveToJSON()
     }
-    displayBooks(); // Exibe os livros após o carregamento
+    displayBooks()
 }
 
-// Event listeners
-document.getElementById('add-book-form').addEventListener('submit', addBook);
-document.getElementById('search-button').addEventListener('click', searchBooks);
-document.getElementById('sort-button').addEventListener('click', sortBooks);
 
-// Carregamento inicial
-document.addEventListener('DOMContentLoaded', loadFromJSON);
+document.getElementById('add-book-form').addEventListener('submit', addBook)
+document.getElementById('search-button').addEventListener('click', searchBooks)
+document.getElementById('sort-button').addEventListener('click', sortBooks)
+
+
+document.addEventListener('DOMContentLoaded', loadFromJSON)
